@@ -1,3 +1,2 @@
-import { test } from "./test"
+import { Board } from "./gameClasses/gameBoard"
 import "./style.css"
-test()

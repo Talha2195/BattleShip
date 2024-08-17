@@ -110,23 +110,33 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/gameClasses/gameBoard.js":
+/*!**************************************!*\
+  !*** ./src/gameClasses/gameBoard.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   Board: () => (/* binding */ Board)\n/* harmony export */ });\n/* harmony import */ var _ship__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ship */ \"./src/gameClasses/ship.js\");\n\nclass Board {\n  constructor(size = 10) {\n    this.size = size\n    this.grid = this.createBoard()\n  }\n\n  createBoard() {\n    return Array.from({ length: this.size }, () => Array(this.size).fill(\"X\")) // Use \"X\" to represent empty cells\n  }\n\n  printBoard() {\n    console.log(this.grid.map((row) => row.join(\" \")).join(\"\\n\"))\n  }\n\n  canPlaceShip(ship, orientation, startRow, startCol) {\n    const length = ship.length\n    if (orientation === \"horizontal\") {\n      if (startCol + length > this.size) return false\n      for (let i = 0; i < length; i++) {\n        if (this.grid[startRow][startCol + i] !== \"X\") return false\n      }\n    } else if (orientation === \"vertical\") {\n      if (startRow + length > this.size) return false\n      for (let i = 0; i < length; i++) {\n        if (this.grid[startRow + i][startCol] !== \"X\") return false\n      }\n    } else {\n      throw new Error(\"Invalid orientation. Use 'horizontal' or 'vertical'.\")\n    }\n    return true\n  }\n\n  placeShip(ship, orientation, startRow, startCol) {\n    if (!this.canPlaceShip(ship, orientation, startRow, startCol)) {\n      console.log(\"Cannot place ship.\")\n      return\n    }\n\n    const length = ship.length\n\n    if (orientation === \"horizontal\") {\n      for (let i = 0; i < length; i++) {\n        this.grid[startRow][startCol + i] = \"F\"\n      }\n    } else if (orientation === \"vertical\") {\n      for (let i = 0; i < length; i++) {\n        this.grid[startRow + i][startCol] = \"F\"\n      }\n    }\n  }\n}\nconst board = new Board()\nboard.placeShip(_ship__WEBPACK_IMPORTED_MODULE_0__.shipOne, \"vertical\", 1, 1) // Place horizontally at (2, 3)\nboard.printBoard() // Print the board to see the result\n\n\n//# sourceURL=webpack://webpack-demo/./src/gameClasses/gameBoard.js?");
+
+/***/ }),
+
+/***/ "./src/gameClasses/ship.js":
+/*!*********************************!*\
+  !*** ./src/gameClasses/ship.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   shipOne: () => (/* binding */ shipOne)\n/* harmony export */ });\nclass Ship {\n  constructor(length) {\n    this.length = length\n    this.hit = 0\n    this.sunk = false\n  }\n\n  isHit() {\n    this.hit++\n    if (this.hit >= this.length) {\n      this.sunk = true\n    }\n  }\n\n  isSunk() {\n    return this.sunk\n  }\n}\nconst shipOne = new Ship(1)\n\n\n//# sourceURL=webpack://webpack-demo/./src/gameClasses/ship.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./test */ \"./src/test.js\");\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\n(0,_test__WEBPACK_IMPORTED_MODULE_0__.test)()\n\n\n//# sourceURL=webpack://webpack-demo/./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/test.js":
-/*!*********************!*\
-  !*** ./src/test.js ***!
-  \*********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   test: () => (/* binding */ test)\n/* harmony export */ });\nfunction test() {\n  console.log(\"Yeah, this works!\")\n}\n\n\n//# sourceURL=webpack://webpack-demo/./src/test.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _gameClasses_gameBoard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gameClasses/gameBoard */ \"./src/gameClasses/gameBoard.js\");\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\n\n\n\n//# sourceURL=webpack://webpack-demo/./src/index.js?");
 
 /***/ })
 

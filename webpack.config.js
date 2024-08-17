@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -15,10 +16,6 @@ module.exports = {
       template: "src/temp.html",
     }),
   ],
-  output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
-  },
   module: {
     rules: [
       {
@@ -30,5 +27,11 @@ module.exports = {
         type: "asset/resource",
       },
     ],
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 9000,
+    open: true, // Opens the browser automatically
   },
 }
