@@ -1,4 +1,4 @@
-import { shipOne } from "./ship"
+import { Ship, shipOne, shipTwo, shipThree } from "./ship"
 export class Board {
   constructor(size = 10) {
     this.size = size
@@ -6,7 +6,7 @@ export class Board {
   }
 
   createBoard() {
-    return Array.from({ length: this.size }, () => Array(this.size).fill("X")) // Use "X" to represent empty cells
+    return Array.from({ length: this.size }, () => Array(this.size).fill("-")) // Use "X" to represent empty cells
   }
 
   printBoard() {
@@ -18,12 +18,12 @@ export class Board {
     if (orientation === "horizontal") {
       if (startCol + length > this.size) return false
       for (let i = 0; i < length; i++) {
-        if (this.grid[startRow][startCol + i] !== "X") return false
+        if (this.grid[startRow][startCol + i] !== "-") return false
       }
     } else if (orientation === "vertical") {
       if (startRow + length > this.size) return false
       for (let i = 0; i < length; i++) {
-        if (this.grid[startRow + i][startCol] !== "X") return false
+        if (this.grid[startRow + i][startCol] !== "-") return false
       }
     } else {
       throw new Error("Invalid orientation. Use 'horizontal' or 'vertical'.")
@@ -41,15 +41,28 @@ export class Board {
 
     if (orientation === "horizontal") {
       for (let i = 0; i < length; i++) {
-        this.grid[startRow][startCol + i] = "F"
+        this.grid[startRow][startCol + i] = ship
       }
     } else if (orientation === "vertical") {
       for (let i = 0; i < length; i++) {
-        this.grid[startRow + i][startCol] = "F"
+        this.grid[startRow + i][startCol] = ship
       }
+    }
+  }
+  receiveAttack(coOne, coTwo) {
+    if (this.grid[coOne][coTwo] !== "-") {
+      this.grid[coOne][coTwo].isHit()
+      this.grid[coOne][coTwo] = "T"
+    } else {
+      console.log("You missed!")
     }
   }
 }
 const board = new Board()
-board.placeShip(shipOne, "vertical", 1, 1) // Place horizontally at (2, 3)
-board.printBoard() // Print the board to see the result
+board.placeShip(shipOne, "vertical", 1, 1)
+board.placeShip(shipTwo, "horizontal", 2, 2)
+// board.placeShip(shipThree, "vertical", 3, 1)
+board.receiveAttack(1, 1)
+board.receiveAttack(2, 2)
+board.receiveAttack(2, 3)
+board.printBoard()

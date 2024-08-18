@@ -1,3 +1,69 @@
-.hello {
-  color: red;
+#mainDiv {
+  /* border: 1px solid black; */
+  height: 90vh;
+}
+
+#subDiv {
+  height: 100%;
+  /* border: 1px solid red; */
+}
+
+#screenDiv {
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid red; */
+  height: 15%;
+}
+
+#screen {
+  border: 2px solid black;
+  height: 80%;
+  width: 50%;
+  border-radius: 50px;
+}
+
+#boardBox {
+  display: flex;
+  justify-content: space-around;
+  /* border: 1px solid black; */
+  height: 80%;
+}
+
+#playerBox,
+#compBox {
+  margin-top: 5%;
+  border: 2px solid black;
+  height: 80%;
+  width: 40%;
+}
+
+#buttonDiv {
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid blue; */
+  height: 5%;
+}
+
+#start {
+  margin-right: 10%;
+}
+
+#start,
+#random {
+  background: none;
+  outline: none;
+  border: none;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 5%;
+}
+
+#start:hover,
+#random:hover {
+  background-color: #e8e8e8;
+}
+
+#start:active,
+#random:active {
+  background-color: #a8a8a8;
 }
