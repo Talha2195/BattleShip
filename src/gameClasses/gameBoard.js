@@ -58,11 +58,11 @@ export class Board {
     }
   }
 }
-const board = new Board()
-board.placeShip(shipOne, "vertical", 1, 1)
-board.placeShip(shipTwo, "horizontal", 2, 2)
+// const board = new Board()
+// board.placeShip(shipOne, "vertical", 1, 1)
+// board.placeShip(shipTwo, "horizontal", 2, 2)
 // board.placeShip(shipThree, "vertical", 3, 1)
-board.receiveAttack(1, 1)
-board.receiveAttack(2, 2)
-board.receiveAttack(2, 3)
-board.printBoard()
+// board.receiveAttack(1, 1)
+// board.receiveAttack(2, 2)
+// board.receiveAttack(2, 3)
+// board.printBoard()

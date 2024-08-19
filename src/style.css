@@ -39,31 +39,43 @@
 
 #buttonDiv {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   /* border: 1px solid blue; */
   height: 5%;
+  width: 40%;
+  margin-left: 30%;
 }
 
-#start {
-  margin-right: 10%;
-}
-
-#start,
-#random {
+#buttonDiv > button {
   background: none;
   outline: none;
   border: none;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 10px;
-  width: 5%;
+  width: 25%;
 }
 
-#start:hover,
-#random:hover {
+#buttonDiv > button:hover {
   background-color: #e8e8e8;
 }
 
-#start:active,
-#random:active {
+#buttonDiv > button:active {
   background-color: #a8a8a8;
+}
+.board-row {
+  display: flex;
+}
+
+.board-cell {
+  width: 55px;
+  height: 45px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.cell-active {
+  background-color: lightblue;
+}
+.board-cell:hover {
+  background-color: #e0e0e0;
 }
