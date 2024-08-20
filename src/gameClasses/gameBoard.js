@@ -1,12 +1,13 @@
-import { Ship, shipOne, shipTwo, shipThree } from "./ship"
+import { Player } from "./player"
 export class Board {
-  constructor(size = 10) {
+  constructor(size = 10, highlightCallback) {
     this.size = size
     this.grid = this.createBoard()
+    this.highlightCallback = highlightCallback
   }
 
   createBoard() {
-    return Array.from({ length: this.size }, () => Array(this.size).fill("-")) // Use "X" to represent empty cells
+    return Array.from({ length: this.size }, () => Array(this.size).fill("-"))
   }
 
   printBoard() {
@@ -42,10 +43,12 @@ export class Board {
     if (orientation === "horizontal") {
       for (let i = 0; i < length; i++) {
         this.grid[startRow][startCol + i] = ship
+        this.highlightCallback(startRow, startCol + i)
       }
     } else if (orientation === "vertical") {
       for (let i = 0; i < length; i++) {
         this.grid[startRow + i][startCol] = ship
+        this.highlightCallback(startRow + i, startCol)
       }
     }
   }
@@ -54,15 +57,8 @@ export class Board {
       this.grid[coOne][coTwo].isHit()
       this.grid[coOne][coTwo] = "T"
     } else {
+      this.grid[coOne][coTwo] = "M"
       console.log("You missed!")
     }
   }
 }
-// const board = new Board()
-// board.placeShip(shipOne, "vertical", 1, 1)
-// board.placeShip(shipTwo, "horizontal", 2, 2)
-// board.placeShip(shipThree, "vertical", 3, 1)
-// board.receiveAttack(1, 1)
-// board.receiveAttack(2, 2)
-// board.receiveAttack(2, 3)
-// board.printBoard()

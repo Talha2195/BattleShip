@@ -1,4 +1,4 @@
-class Ship {
+export class Ship {
   static shipCount = 0
   constructor(length) {
     this.length = length
@@ -44,4 +44,6 @@ export const shipOne = new Ship(1)
 
 export const shipTwo = new Ship(2)
 
-// export const shipThree = new Ship(3)
+export const shipThree = new Ship(3)
+
+export const shipFour = new Ship(4)

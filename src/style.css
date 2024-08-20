@@ -79,3 +79,13 @@
 .board-cell:hover {
   background-color: #e0e0e0;
 }
+.cell {
+  width: 30px;
+  height: 30px;
+  background-color: lightblue;
+  border: 1px solid #ddd;
+}
+
+.board-cell.highLighted {
+  background: red;
+}

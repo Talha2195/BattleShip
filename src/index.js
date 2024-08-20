@@ -1,9 +1,12 @@
 import { started } from "./gameBoardDom/start"
 import { Board } from "./gameClasses/gameBoard"
-import { player } from "./gameClasses/player"
+import { Player, player, computer } from "./gameClasses/player"
 import { shipOne } from "./gameClasses/ship"
+import { randomButton } from "./gameBoardDom/randomButton"
+import { Ship } from "./gameClasses/ship"
+import { configureShips } from "./gameFunctions/placeRandomShip"
 import "./style.css"
 const startButton = document.getElementById("start")
 startButton.addEventListener("click", started)
-player.board.placeShip(shipOne, "horizontal", 0, 0)
-player.board.printBoard()
+const ranButton = document.getElementById("random")
+ranButton.addEventListener("click", randomButton)
