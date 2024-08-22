@@ -1,9 +1,10 @@
 import { Player } from "./player"
+import { Ship } from "./ship"
 export class Board {
-  constructor(size = 10, highlightCallback) {
+  constructor(size = 10, box) {
     this.size = size
     this.grid = this.createBoard()
-    this.highlightCallback = highlightCallback
+    this.box = box
   }
 
   createBoard() {
@@ -39,26 +40,48 @@ export class Board {
     }
 
     const length = ship.length
-
+    const block = "block"
     if (orientation === "horizontal") {
       for (let i = 0; i < length; i++) {
         this.grid[startRow][startCol + i] = ship
-        this.highlightCallback(startRow, startCol + i)
+        this.highLight(startRow, startCol + i, block)
       }
     } else if (orientation === "vertical") {
       for (let i = 0; i < length; i++) {
         this.grid[startRow + i][startCol] = ship
-        this.highlightCallback(startRow + i, startCol)
+        this.highLight(startRow + i, startCol, block)
       }
     }
   }
+  highLight(row, col, pass) {
+    const cell = document.querySelector(
+      `#${this.box} .board-cell[data-row="${row}"][data-col="${col}"]`
+    )
+    if (cell) {
+      if (pass == "block") {
+        cell.classList.add("highLighted")
+      } else if (pass == "dot") {
+        cell.classList.add("hit")
+        cell.classList.remove("highLighted")
+      }
+    } else {
+      console.log(`Cell not found at Row ${row}, Col ${col}`)
+    }
+  }
   receiveAttack(coOne, coTwo) {
-    if (this.grid[coOne][coTwo] !== "-") {
-      this.grid[coOne][coTwo].isHit()
+    const dot = "dot"
+    const cell = this.grid[coOne][coTwo]
+    if (cell instanceof Ship) {
+      cell.isHit()
+      this.highLight(coOne, coTwo, dot)
       this.grid[coOne][coTwo] = "T"
+    } else if (cell === "M" || cell === "T") {
+      console.log("Grid cell already marked!")
     } else {
       this.grid[coOne][coTwo] = "M"
-      console.log("You missed!")
     }
+  }
+  clearBoard() {
+    this.grid = this.createBoard()
   }
 }

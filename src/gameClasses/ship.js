@@ -35,6 +35,7 @@ export class Ship {
       console.log("The game has ended!")
       console.log(Ship.shipCount)
     } else {
+      console.log(this.shipCount)
       console.log("Game hasn't ended!")
     }
   }
@@ -47,3 +48,5 @@ export const shipTwo = new Ship(2)
 export const shipThree = new Ship(3)
 
 export const shipFour = new Ship(4)
+
+export const shipFive = new Ship(5)

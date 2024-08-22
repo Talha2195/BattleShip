@@ -3,7 +3,7 @@ export class Player {
   constructor(box) {
     this.turn = false
     this.box = box
-    this.board = new Board(10, this.highlight.bind(this))
+    this.board = new Board(10, box)
   }
   loadCellsDom() {
     const cellsDiv = document.getElementById(this.box)
@@ -24,8 +24,6 @@ export class Player {
 
       cellsDiv.appendChild(rowDiv)
     })
-
-    this.setupCellListeners()
   }
 
   setupCellListeners() {
@@ -44,11 +42,7 @@ export class Player {
   }
 
   toggleCell(cell) {
-    if (cell.classList.contains("cell-active")) {
-      cell.classList.remove("cell-active")
-    } else {
-      cell.classList.add("cell-active")
-    }
+    cell.classList.add("cell-active")
   }
   highlight(row, col) {
     console.log(`Highlighting cell at Row ${row}, Col ${col}`) // Debug log

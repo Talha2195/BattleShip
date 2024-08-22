@@ -1,10 +1,9 @@
-import { status, state } from "./start"
-import { placeRandomShip } from "../gameFunctions/placeRandomShip"
+import { Player, player, computer } from "../gameClasses/player"
+import { cycleShipPlacement } from "../gameFunctions/cyclePlacement"
 export function randomButton() {
-  if (state === false) {
-    status()
-    console.log("Hello")
-  } else {
-    console.log("Game has already started!")
-  }
+  player.loadCellsDom("playerBox")
+  computer.loadCellsDom("compBox")
+  cycleShipPlacement()
+  const start = document.getElementById("start")
+  start.disabled = false
 }

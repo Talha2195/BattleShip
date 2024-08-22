@@ -1,5 +1,0 @@
-import { shipOne, shipTwo, shipThree, shipFour } from "../gameClasses/ship"
-import { player, computer } from "../gameClasses/player"
-import { getRandomNumberOne } from "./randomNumOne"
-import { Board } from "../gameClasses/gameBoard"
-import { Ship } from "../gameClasses/ship"

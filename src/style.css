@@ -20,8 +20,12 @@
   height: 80%;
   width: 50%;
   border-radius: 50px;
+  text-align: center;
 }
-
+#screenText {
+  margin-top: 25px;
+  font-size: 30px;
+}
 #boardBox {
   display: flex;
   justify-content: space-around;
@@ -74,18 +78,23 @@
 }
 
 .cell-active {
-  background-color: lightblue;
+  background-color: orange;
 }
-.board-cell:hover {
-  background-color: #e0e0e0;
-}
-.cell {
-  width: 30px;
-  height: 30px;
-  background-color: lightblue;
-  border: 1px solid #ddd;
-}
-
 .board-cell.highLighted {
   background: red;
+}
+.board-cell.hit {
+  background-color: #dcdcdc;
+}
+.board-cell.hit::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 8px;
+  transform: translate(140%, 140%);
 }
