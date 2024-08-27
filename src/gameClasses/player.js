@@ -6,6 +6,7 @@ export class Player {
     this.box = box
     this.board = new Board(10, box)
   }
+
   loadCellsDom() {
     const cellsDiv = document.getElementById(this.box)
 
@@ -26,6 +27,7 @@ export class Player {
       cellsDiv.appendChild(rowDiv)
     })
   }
+
   setupCellListeners() {
     const cellDivs = document.querySelectorAll(`#${this.box} .board-cell`)
 
@@ -33,9 +35,11 @@ export class Player {
       cell.addEventListener("click", this.handlePlayerMove.bind(this))
     })
   }
+
   toggleCell(cell) {
     cell.classList.add("cell-active")
   }
+
   handlePlayerMove(event) {
     const row = event.target.dataset.row
     const col = event.target.dataset.col
@@ -48,6 +52,20 @@ export class Player {
     } else {
       player.board.computerMove()
     }
+  }
+
+  resetShips() {
+    Object.values(playerShips).forEach((ship) => {
+      ship.hit = 0
+      ship.sunk = false
+    })
+
+    Object.values(computerShips).forEach((ship) => {
+      ship.hit = 0
+      ship.sunk = false
+    })
+
+    Ship.shipCount = 10
   }
 }
 export const player = new Player("playerBox")

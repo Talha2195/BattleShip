@@ -81,6 +81,7 @@ export class Board {
       this.highLight(row, col, miss)
     }
   }
+
   highLight(row, col, type) {
     const cell = document.querySelector(
       `#${this.box} .board-cell[data-row="${row}"][data-col="${col}"]`
@@ -103,7 +104,6 @@ export class Board {
   clearBoard() {
     this.grid = this.createBoard()
     this.shipCount = 0
-    Ship.shipCount = 10
   }
 
   computerMove() {
@@ -125,9 +125,14 @@ export class Board {
       this.checkGameStatus()
     }
   }
+
   checkGameStatus() {
     if (this.shipCount <= 0) {
-      this.gameEnd()
+      if (this.box === "playerBox") {
+        computer.board.gameEnd("Computer")
+      } else if (this.box === "compBox") {
+        player.board.gameEnd("Player")
+      }
     } else {
       console.log(`Ships remaining: ${this.shipCount}`)
     }
@@ -141,7 +146,9 @@ export class Board {
     })
   }
 
-  gameEnd() {
+  gameEnd(winner) {
+    let screen = document.getElementById("screenText")
+    screen.innerHTML = `Game Over! ${winner} wins!`
     this.disableAllCells()
   }
 }
