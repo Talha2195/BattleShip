@@ -77,9 +77,6 @@
   cursor: pointer;
 }
 
-.cell-active {
-  background-color: orange;
-}
 .board-cell.highLighted {
   background: red;
 }
@@ -97,4 +94,7 @@
   margin-top: 5px;
   margin-left: 8px;
   transform: translate(140%, 140%);
+}
+.miss {
+  background-color: orange;
 }

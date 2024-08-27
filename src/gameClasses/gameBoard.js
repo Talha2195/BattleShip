@@ -1,4 +1,4 @@
-import { Player } from "./player"
+import { player, computer } from "./player"
 import { Ship } from "./ship"
 export class Board {
   constructor(size = 10, box) {
@@ -53,35 +53,54 @@ export class Board {
       }
     }
   }
-  highLight(row, col, pass) {
+
+  receiveAttack(row, col) {
+    const dot = "dot"
+    const miss = "miss"
+    const cell = this.grid[row][col]
+
+    if (cell instanceof Ship) {
+      cell.isHit()
+      this.highLight(row, col, dot)
+      this.grid[row][col] = "T"
+    } else if (cell === "M" || cell === "T") {
+      console.log("Grid cell already marked!")
+    } else {
+      this.grid[row][col] = "M"
+      this.highLight(row, col, miss)
+    }
+  }
+
+  highLight(row, col, type) {
     const cell = document.querySelector(
       `#${this.box} .board-cell[data-row="${row}"][data-col="${col}"]`
     )
     if (cell) {
-      if (pass == "block") {
+      if (type === "block") {
         cell.classList.add("highLighted")
-      } else if (pass == "dot") {
+      } else if (type === "dot") {
         cell.classList.add("hit")
+        cell.classList.remove("highLighted")
+      } else if (type === "miss") {
+        cell.classList.add("miss")
         cell.classList.remove("highLighted")
       }
     } else {
       console.log(`Cell not found at Row ${row}, Col ${col}`)
     }
   }
-  receiveAttack(coOne, coTwo) {
-    const dot = "dot"
-    const cell = this.grid[coOne][coTwo]
-    if (cell instanceof Ship) {
-      cell.isHit()
-      this.highLight(coOne, coTwo, dot)
-      this.grid[coOne][coTwo] = "T"
-    } else if (cell === "M" || cell === "T") {
-      console.log("Grid cell already marked!")
-    } else {
-      this.grid[coOne][coTwo] = "M"
-    }
-  }
+
   clearBoard() {
     this.grid = this.createBoard()
+  }
+  computerMove() {
+    let row, col
+    do {
+      row = Math.floor(Math.random() * this.size)
+      col = Math.floor(Math.random() * this.size)
+    } while (this.grid[row][col] === "M" || this.grid[row][col] === "T")
+
+    player.board.receiveAttack(row, col)
+    player.board.printBoard
   }
 }

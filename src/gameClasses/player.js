@@ -25,35 +25,26 @@ export class Player {
       cellsDiv.appendChild(rowDiv)
     })
   }
-
   setupCellListeners() {
     const cellDivs = document.querySelectorAll(`#${this.box} .board-cell`)
 
     cellDivs.forEach((cell) => {
-      cell.addEventListener("click", (event) => {
-        const row = event.target.dataset.row
-        const col = event.target.dataset.col
-        this.board.receiveAttack(row, col)
-        this.board.printBoard()
-        this.toggleCell(event.target)
-        console.log(`Cell clicked: Row ${row}, Col ${col}`)
-      })
+      cell.addEventListener("click", this.handlePlayerMove.bind(this))
     })
   }
-
   toggleCell(cell) {
     cell.classList.add("cell-active")
   }
-  highlight(row, col) {
-    console.log(`Highlighting cell at Row ${row}, Col ${col}`) // Debug log
-    const cell = document.querySelector(
-      `#${this.box} .board-cell[data-row="${row}"][data-col="${col}"]`
-    )
-    if (cell) {
-      cell.classList.add("highLighted")
-    } else {
-      console.log(`Cell not found at Row ${row}, Col ${col}`) // Debug log
-    }
+  handlePlayerMove(event) {
+    const row = event.target.dataset.row
+    const col = event.target.dataset.col
+
+    this.board.receiveAttack(row, col)
+    this.board.printBoard()
+    this.toggleCell(event.target)
+    console.log(`Cell clicked: Row ${row}, Col ${col}`)
+
+    player.board.computerMove()
   }
 }
 export const player = new Player("playerBox")
