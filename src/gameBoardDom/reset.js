@@ -1,3 +1,4 @@
+import { player, computer } from "../gameClasses/player"
 export function resetButton() {
   const random = document.getElementById("random")
   const start = document.getElementById("start")
@@ -5,6 +6,8 @@ export function resetButton() {
   const compScreen = document.getElementById("compBox")
   playerScreen.innerHTML = ""
   compScreen.innerHTML = ""
-  start.disabled = false
+  start.disabled = true
   random.disabled = false
+  player.board.clearBoard()
+  computer.board.clearBoard()
 }

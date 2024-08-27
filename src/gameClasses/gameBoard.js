@@ -5,6 +5,7 @@ export class Board {
     this.size = size
     this.grid = this.createBoard()
     this.box = box
+    this.shipCount = 0
   }
 
   createBoard() {
@@ -52,6 +53,8 @@ export class Board {
         this.highLight(startRow + i, startCol, block)
       }
     }
+
+    this.incrementShipCount()
   }
 
   receiveAttack(row, col) {
@@ -61,16 +64,23 @@ export class Board {
 
     if (cell instanceof Ship) {
       cell.isHit()
-      this.highLight(row, col, dot)
-      this.grid[row][col] = "T"
+      if (cell.isSunk()) {
+        this.decrementShipCount()
+        this.highLight(row, col, dot)
+        this.grid[row][col] = "T"
+        console.log(this.shipCount)
+      } else {
+        this.highLight(row, col, dot)
+        this.grid[row][col] = "T"
+      }
     } else if (cell === "M" || cell === "T") {
       console.log("Grid cell already marked!")
+      return "marked"
     } else {
       this.grid[row][col] = "M"
       this.highLight(row, col, miss)
     }
   }
-
   highLight(row, col, type) {
     const cell = document.querySelector(
       `#${this.box} .board-cell[data-row="${row}"][data-col="${col}"]`
@@ -92,7 +102,10 @@ export class Board {
 
   clearBoard() {
     this.grid = this.createBoard()
+    this.shipCount = 0
+    Ship.shipCount = 10
   }
+
   computerMove() {
     let row, col
     do {
@@ -102,5 +115,33 @@ export class Board {
 
     player.board.receiveAttack(row, col)
     player.board.printBoard
+  }
+  incrementShipCount() {
+    this.shipCount++
+  }
+  decrementShipCount() {
+    if (this.shipCount > 0) {
+      this.shipCount--
+      this.checkGameStatus()
+    }
+  }
+  checkGameStatus() {
+    if (this.shipCount <= 0) {
+      this.gameEnd()
+    } else {
+      console.log(`Ships remaining: ${this.shipCount}`)
+    }
+  }
+
+  disableAllCells() {
+    const cellDivs = document.querySelectorAll(`#${this.box} .board-cell`)
+    cellDivs.forEach((cell) => {
+      cell.style.pointerEvents = "none"
+      cell.classList.add("disabled")
+    })
+  }
+
+  gameEnd() {
+    this.disableAllCells()
   }
 }

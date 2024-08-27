@@ -1,4 +1,5 @@
 import { Board } from "./gameBoard"
+import { Ship } from "./ship"
 export class Player {
   constructor(box) {
     this.turn = false
@@ -38,14 +39,32 @@ export class Player {
   handlePlayerMove(event) {
     const row = event.target.dataset.row
     const col = event.target.dataset.col
-
-    this.board.receiveAttack(row, col)
+    let attack = this.board.receiveAttack(row, col)
     this.board.printBoard()
     this.toggleCell(event.target)
     console.log(`Cell clicked: Row ${row}, Col ${col}`)
-
-    player.board.computerMove()
+    if (attack == "marked") {
+      console.log("Try again")
+    } else {
+      player.board.computerMove()
+    }
   }
 }
 export const player = new Player("playerBox")
 export const computer = new Player("compBox")
+
+export const playerShips = {
+  shipOne: new Ship(1),
+  shipTwo: new Ship(2),
+  shipThree: new Ship(3),
+  shipFour: new Ship(4),
+  shipFive: new Ship(5),
+}
+
+export const computerShips = {
+  shipOne: new Ship(1),
+  shipTwo: new Ship(2),
+  shipThree: new Ship(3),
+  shipFour: new Ship(4),
+  shipFive: new Ship(5),
+}

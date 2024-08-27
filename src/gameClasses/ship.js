@@ -30,6 +30,7 @@ export class Ship {
       Ship.gameStatus()
     }
   }
+
   static gameStatus() {
     if (Ship.shipCount <= 0) {
       console.log("The game has ended!")
@@ -40,13 +41,3 @@ export class Ship {
     }
   }
 }
-
-export const shipOne = new Ship(1)
-
-export const shipTwo = new Ship(2)
-
-export const shipThree = new Ship(3)
-
-export const shipFour = new Ship(4)
-
-export const shipFive = new Ship(5)
