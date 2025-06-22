@@ -6,7 +6,7 @@ Was made using webpack and vanilla Javascript
 
 npm run build to start
 
-Live here -
+Live here - https://battle-ship-sage.vercel.app/
 
 ![ScreenShot](/src/images/battleShipScreenCapOne.png)
 ![ScreenShot](/src/images/battleShipScreenCapTwo.png)
