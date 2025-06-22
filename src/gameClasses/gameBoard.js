@@ -88,7 +88,9 @@ export class Board {
     )
     if (cell) {
       if (type === "block") {
-        cell.classList.add("highLighted")
+        if (this.box === "playerBox") {
+          cell.classList.add("highLighted")
+        }
       } else if (type === "dot") {
         cell.classList.add("hit")
         cell.classList.remove("highLighted")
@@ -130,8 +132,10 @@ export class Board {
     if (this.shipCount <= 0) {
       if (this.box === "playerBox") {
         computer.board.gameEnd("Computer")
+        player.board.disableAllCells()
       } else if (this.box === "compBox") {
         player.board.gameEnd("Player")
+        computer.board.disableAllCells()
       }
     } else {
       console.log(`Ships remaining: ${this.shipCount}`)
@@ -148,7 +152,7 @@ export class Board {
 
   gameEnd(winner) {
     let screen = document.getElementById("screenText")
-    screen.innerHTML = `Game Over! ${winner} wins!`
+    screen.innerHTML = `Game Over, ${winner} wins!`
     this.disableAllCells()
   }
 }

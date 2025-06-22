@@ -14,6 +14,7 @@ module.exports = {
       title: "Output Management",
       filename: "index.html",
       template: "src/temp.html",
+      favicon: "src/favicon.ico",
     }),
   ],
   module: {
@@ -32,6 +33,6 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 9000,
-    open: true, // Opens the browser automatically
+    open: true,
   },
 }
