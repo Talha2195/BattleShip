@@ -8,5 +8,5 @@ npm run build to start
 
 Live here -
 
-![ScreenShot](/images/battleShipScreenCapOne.png)
-![ScreenShot](/images/battleShipScreenCapTwo.png)
+![ScreenShot](/src/images/battleShipScreenCapOne.png)
+![ScreenShot](/src/images/battleShipScreenCapTwo.png)
